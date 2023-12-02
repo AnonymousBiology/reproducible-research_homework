@@ -1,6 +1,54 @@
 # Reproducible research: version control and R
 
-\# INSERT ANSWERS HERE #
+## Question 4
+
+**a. Execute the code to produce the paths of two random walks. What do you observe?**
+
+The graphs maps the spatial trajectory of two random walks across a 2 dimensional x/y axis, both starting at the 0,0 coordinate. Colour is used to graphically show time, with gradient of dark to light blue from the start to the end of each walk. Each walk is comprised of 500 steps, with each step being the same distance (0.25), but in a randomised direction. The angle of each point relative to the previous is calculated by generating a random number between 0 and 2π using the runif() function that provides an expression of the magnitude of displacement in the x and y directions based on trigonometry. Both graphs are the product of the same function of step randomisation, and thus show different paths through space. Each time the code is rerun, 
+
+is determined by the runif() function, which randomly selects a number between 0
+
+**Investigate the term **random seeds**. What is a random seed and how does it work? (5 points)**
+
+A random seed is a base value used to by a pseudo-random generater to ensure the same random output each time a piece of code is run. 
+
+**Edit the script to make a reproducible simulation of Brownian motion. Commit the file and push it to your forked `reproducible-research_homework` repo. (10 points)**
+
+added set.seed() command with a set number 
+
+## Question 5 
+
+**Import the data for double-stranded DNA (dsDNA) viruses taken from the Supplementary Materials of the original paper into Posit Cloud (the csv file is in the question-5-data folder). How many rows and columns does the table have? (3 points)**
+
+33 rows and 13 columns not including the header row. 
+
+**What transformation can you use to fit a linear model to the data? Apply the transformation. (3 points)**
+
+Can use several transformations -> I decided to use log transformations as this was in line with what was in the original paper. 
+
+**Find the exponent (α) and scaling factor (β) of the allometric law for dsDNA viruses and write the p-values from the model you obtained, are they statistically significant? Compare the values you found to those shown in Table 2 of the paper, did you find the same values? (10 points**)
+
+alpha: 1.5152 the gradient of the line 
+beta: exp(7.0748) the intercept 
+
+Low p-values show that the model is a good fit for the data 
+
+Values very similar to values in paper 2 
+
+**Write the code to reproduce the figure shown below. (10 points)**
+
+ggplot(data, aes(x = log.Genome.length..kb., y = log.Virion.volume..nm.nm.nm.)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = TRUE) +
+  labs(x = "log[Genome length(kb)]", y = "log[Virion volume(nm3)]") +
+  theme_bw() +
+  theme(
+    text = element_text(face = "bold")  
+  )
+
+What is the estimated volume of a 300 kb dsDNA virus? (4 points)
+
+843704.3 nm3
 
 ## Instructions
 
