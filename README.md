@@ -16,7 +16,7 @@ A random seed is a base value used to by a pseudo-random generater to ensure the
 
 added set.seed() command with a set number 
 
-## Question 5 
+## Question 5 
 
 **Import the data for double-stranded DNA (dsDNA) viruses taken from the Supplementary Materials of the original paper into Posit Cloud (the csv file is in the question-5-data folder). How many rows and columns does the table have? (3 points)**
 
@@ -48,7 +48,7 @@ ggplot(data, aes(x = log.Genome.length..kb., y = log.Virion.volume..nm.nm.nm.)) 
 
 What is the estimated volume of a 300 kb dsDNA virus? (4 points)
 
-843704.3 nm3
+6697007 nm3
 
 ## Instructions
 
