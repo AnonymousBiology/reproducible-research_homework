@@ -14,7 +14,7 @@ The randomisation of each step in the path means that ```plot1``` and ```plot 2`
 
 A random seed is a base value used to by a pseudo-random generater to ensure the same random output each time a piece of code is run - this can be applied to any code containing same mechanism of random number generation. In the context of **random_walk.R**, for instance, the ```set.seed()``` function can be used as a single integer argument within the ```random_walk()``` function to ensure that the same sequence of random angles is generated for each step every time the function is applied. Each step is completely random relative to the previous step within this function, but the whole function repeats the same pattern when used multiple times. The actual value of the seed itself is arbitrary (I used the integer 12) but this value must be written into the code to ensure that the random output will be repeatable for anyone else using the code. 
 
-### _Edit the script to make a reproducible simulation of Brownian motion. Commit the file and push it to your forked `reproducible-research_homework` repo. (10)_
+### _Edit the script to make a reproducible simulation of Brownian motion. Commit the file and push it to your forked reproducible-research_homework repo. (10)_
 
 I added the ```set.seed()``` function to the ```random_walk()``` function just before the loop argument. The commit is titled "set.seed() edit". 
 
@@ -79,9 +79,9 @@ Residual standard error: 1.263 on 31 degrees of freedom
 Multiple R-squared:  0.7134,	Adjusted R-squared:  0.7042 
 F-statistic: 77.16 on 1 and 31 DF,  p-value: 6.438e-10
 ```
-Within this linear model ( $`\ln(V) = \alpha \ln(L) + \ln(\beta)`$ ), $`alpha`$ is the gradient of the slope, which is 1.5152 according to the estimated coefficients. $`\log_{10}(\beta) \`$ is the intercept of this model, which is 7.0748, so the value of $`beta`$ is $`exp(7.0748)`$, which is 1181.807 (3 d.p). The p-values of $`alpha`$ and $`beta`$ are 8.784 6.44e-10 and 9.196 2.28e-10 respectively, which are significnatly lower than 0.05 and are therefore statistically significant. This suggests that the model is a good fit for the data. 
+Within this linear model ( $`\ln(V) = \alpha \ln(L) + \ln(\beta)`$ ), $`α`$ is the gradient of the slope, which is 1.5152 according to the estimated coefficients. $`\ln(\beta)`$ is the intercept of this model, which is 7.0748, so the value of $`β`$ is $`exp(7.0748)`$, which is 1181.807 (3 d.p). The p-values of $`α`$ and $`β`$ are 8.784 6.44e-10 and 9.196 2.28e-10 respectively, which are significnatly lower than 0.05 and are therefore statistically significant. This suggests that the model is a good fit for the data. 
 
-The values of the allometric exponent and scaling factor for dsDNA in the paper are 1.52 and 1,182, which are the same as my predicted $`alpha`$ and $`beta`$ when rounded. 
+The values of the allometric exponent and scaling factor for dsDNA in the paper are 1.52 and 1,182, which are the same as my predicted $`α`$ and $`β`$ when rounded. 
 
 ### _Write the code to reproduce the figure shown below. (10)_
 
@@ -102,7 +102,17 @@ This produced the output:
 
 ### _What is the estimated volume of a 300 kb dsDNA virus? (4)_
 
-6697007 nm3
+I input my estimates for $`α`$ and $`β`$ into the equation $`V = \beta L^{\alpha}`$:
+
+```
+L <- 300 
+α <- 1.5152
+β <- exp(7.0748)
+
+V <- β*L^α
+```
+
+This produced an estimated volume of 6697007 nm3
 
 ## Instructions
 
