@@ -24,35 +24,83 @@ I added the ```set.seed()``` function to the ```random_walk()``` function just b
 
 ## Question 5 
 
-**Import the data for double-stranded DNA (dsDNA) viruses taken from the Supplementary Materials of the original paper into Posit Cloud (the csv file is in the question-5-data folder). How many rows and columns does the table have? (3 points)**
+### _Import the data for double-stranded DNA (dsDNA) viruses taken from the Supplementary Materials of the original paper into Posit Cloud (the csv file is in the question-5-data folder). How many rows and columns does the table have? (3)_
 
-33 rows and 13 columns not including the header row. 
+I used the following code to count the number of rows and columns in my dataset
 
-**What transformation can you use to fit a linear model to the data? Apply the transformation. (3 points)**
+```
+data <- read.csv("Cui_etal2014.csv")
 
-Can use several transformations -> I decided to use log transformations as this was in line with what was in the original paper. 
+num_rows <- nrow(data)
+num_columns <- ncol(data)
+num_rows
+num_columns
+```
+This produced the output of 33 rows and 13 columns. The header row was not included in this count. 
 
-**Find the exponent (α) and scaling factor (β) of the allometric law for dsDNA viruses and write the p-values from the model you obtained, are they statistically significant? Compare the values you found to those shown in Table 2 of the paper, did you find the same values? (10 points**)
+### _What transformation can you use to fit a linear model to the data? Apply the transformation. (3)_
 
-alpha: 1.5152 the gradient of the line 
-beta: exp(7.0748) the intercept 
+Given that the relationship between virion volume and genome length can be modelled by an allometric equation ( $`V = \beta L^{\alpha}`$ ) according to the original paper, log-transforming these variables should linearise the model to the form $`\ln(V) = \alpha \ln(L) + \ln(\beta)`$. 
 
-Low p-values show that the model is a good fit for the data 
+The following code is used to apply this transformation to the log.Virion.volume..nm.nm.nm. and log.Genome.length..kb. variables 
 
-Values very similar to values in paper 2 
+```
+data$log.Virion.volume..nm.nm.nm. <- log(data$Virion.volume..nm.nm.nm.)
+data$log.Genome.length..kb. <- log(data$Genome.length..kb.)
+```
 
-**Write the code to reproduce the figure shown below. (10 points)**
+### _Find the exponent (α) and scaling factor (β) of the allometric law for dsDNA viruses and write the p-values from the model you obtained, are they statistically significant? Compare the values you found to those shown in Table 2 of the paper, did you find the same values? (10)_
 
+The following code creates a linear regression model based the log-transformed virion volume and genome length values: 
+
+```
+model <- lm(log.Virion.volume..nm.nm.nm. ~ log.Genome.length..kb., data = data)
+summary(model)
+```
+This provides the following output: 
+
+```
+Call:
+lm(formula = log.Virion.volume..nm.nm.nm. ~ log.Genome.length..kb., 
+    data = data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.8523 -1.2530 -0.1026  1.0739  2.0193 
+
+Coefficients:
+                       Estimate Std. Error t value Pr(>|t|)    
+(Intercept)              7.0748     0.7693   9.196 2.28e-10 ***
+log.Genome.length..kb.   1.5152     0.1725   8.784 6.44e-10 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.263 on 31 degrees of freedom
+Multiple R-squared:  0.7134,	Adjusted R-squared:  0.7042 
+F-statistic: 77.16 on 1 and 31 DF,  p-value: 6.438e-10
+```
+Within this linear model ( $`\ln(V) = \alpha \ln(L) + \ln(\beta)`$ ), $`alpha`$ is the gradient of the slope, which is 1.5152 according to the estimated coefficients. $`\log_{10}(\beta) \`$ is the intercept of this model, which is 7.0748, so the value of $`beta`$ is $`exp(7.0748)`$, which is 1181.807 (3 d.p). The p-values of $`alpha`$ and $`beta`$ are 8.784 6.44e-10 and 9.196 2.28e-10 respectively, which are significnatly lower than 0.05 and are therefore statistically significant. This suggests that the model is a good fit for the data. 
+
+The values of the allometric exponent and scaling factor for dsDNA in the paper are 1.52 and 1,182, which are the same as my predicted $`alpha`$ and $`beta`$ when rounded. 
+
+### _Write the code to reproduce the figure shown below. (10)_
+
+I reproduced the figure using the ```ggplot2``` package and the following code: 
+
+```
 ggplot(data, aes(x = log.Genome.length..kb., y = log.Virion.volume..nm.nm.nm.)) +
   geom_point() +
   geom_smooth(method = "lm", se = TRUE) +
   labs(x = "log[Genome length(kb)]", y = "log[Virion volume(nm3)]") +
   theme_bw() +
-  theme(
-    text = element_text(face = "bold")  
+  theme(text = element_text(face = "bold")
   )
+```
+This produced the output: 
 
-What is the estimated volume of a 300 kb dsDNA virus? (4 points)
+![reproduced_allometric_scaling](https://github.com/poppyjdw/reproducible-research_homework/assets/150140489/abc4d7e1-12f5-4e5f-b301-b10f6fe40862)
+
+### _What is the estimated volume of a 300 kb dsDNA virus? (4)_
 
 6697007 nm3
 
