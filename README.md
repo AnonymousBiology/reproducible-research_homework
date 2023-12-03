@@ -2,19 +2,25 @@
 
 ## Question 4
 
-**a. Execute the code to produce the paths of two random walks. What do you observe?**
+### _Execute the code to produce the paths of two random walks. What do you observe? (10)_
 
-The graphs maps the spatial trajectory of two random walks across a 2 dimensional x/y axis, both starting at the 0,0 coordinate. Colour is used to graphically show time, with gradient of dark to light blue from the start to the end of each walk. Each walk is comprised of 500 steps, with each step being the same distance (0.25), but in a randomised direction. The angle of each point relative to the previous is calculated by generating a random number between 0 and 2π using the runif() function that provides an expression of the magnitude of displacement in the x and y directions based on trigonometry. Both graphs are the product of the same function of step randomisation, and thus show different paths through space. Each time the code is rerun, 
+The graphs map the spatial trajectory of two random walks across a 2-dimensional axis, both starting at the 0,0 coordinate. Colour is used to graphically show time, with gradient of dark to light blue from the start to the end of each walk. 
 
-is determined by the runif() function, which randomly selects a number between 0
+Each walk is comprised of 500 steps with one unit of time per step, and each step being the same distance (h = 0.25), but in a randomised direction. The ```angle``` of each point relative to the previous is calculated by generating a random number between 0 and 2π using the ```runif()``` function. This is then used to create two expressions to describe the magnitude of displacement in the x (```cos(angle)*h```) and y (```sin(angle)*h```) direction from each previous point, which is used to generate the next coordinate. This function is used generate two datasets of random walk coordinates, which are then plotted and displayed side by side using the ```grid.arrange()``` function.
 
-**Investigate the term **random seeds**. What is a random seed and how does it work? (5 points)**
+The randomisation of each step in the path means that ```plot1``` and ```plot 2``` take different routes through space, despite using the same function to generate the coordinates of both walks. Furthermore, everytime the code is rerun, the output of both plots changes, meaning that the script is not reproducible in its current form. 
 
-A random seed is a base value used to by a pseudo-random generater to ensure the same random output each time a piece of code is run. 
+### _Investigate the term **random seeds**. What is a random seed and how does it work? (5)_
 
-**Edit the script to make a reproducible simulation of Brownian motion. Commit the file and push it to your forked `reproducible-research_homework` repo. (10 points)**
+A random seed is a base value used to by a pseudo-random generater to ensure the same random output each time a piece of code is run - this can be applied to any code containing same mechanism of random number generation. In the context of **random_walk.R**, for instance, the ```set.seed()``` function can be used as a single integer argument within the ```random_walk()``` function to ensure that the same sequence of random angles is generated for each step every time the function is applied. Each step is completely random relative to the previous step within this function, but the whole function repeats the same pattern when used multiple times. The actual value of the seed itself is arbitrary (I used the integer 12) but this value must be written into the code to ensure that the random output will be repeatable for anyone else using the code. 
 
-added set.seed() command with a set number 
+### _Edit the script to make a reproducible simulation of Brownian motion. Commit the file and push it to your forked `reproducible-research_homework` repo. (10)_
+
+I added the ```set.seed()``` function to the ```random_walk()``` function just before the loop argument. The commit is titled "set.seed() edit". 
+
+### _Go to your commit history and click on the latest commit. Show the edit you made to the code in the comparison view (add this image to the **README.md** of the fork). (5)_
+
+<img width="1471" alt="Screenshot 2023-12-03 at 16 55 52" src="https://github.com/poppyjdw/reproducible-research_homework/assets/150140489/d6278049-ba4d-434f-9886-6d3134e8c87c">
 
 ## Question 5 
 
