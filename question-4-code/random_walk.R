@@ -10,6 +10,8 @@ random_walk  <- function (n_steps) {
   
   df[1,] <- c(0,0,1)
   
+  set.seed(12)
+  
   for (i in 2:n_steps) {
     
     h <- 0.25
