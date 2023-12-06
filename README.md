@@ -96,7 +96,7 @@ ggplot(data, aes(x = log.Genome.length..kb., y = log.Virion.volume..nm.nm.nm.)) 
   theme(text = element_text(face = "bold")
   )
 ```
-(This code can be found in the **Question_5.R** file attached to this repository. 
+(This code can be found in the **Question_5.R** file attached to this repository.) 
 
 This produced the output: 
 
