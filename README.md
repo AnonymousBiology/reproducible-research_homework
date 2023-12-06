@@ -96,6 +96,8 @@ ggplot(data, aes(x = log.Genome.length..kb., y = log.Virion.volume..nm.nm.nm.)) 
   theme(text = element_text(face = "bold")
   )
 ```
+(This code can be found in the **Question_5.R** file attached to this repository. 
+
 This produced the output: 
 
 ![reproduced_allometric_scaling](https://github.com/poppyjdw/reproducible-research_homework/assets/150140489/abc4d7e1-12f5-4e5f-b301-b10f6fe40862)
