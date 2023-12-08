@@ -1,5 +1,9 @@
 # Reproducible research: version control and R
 
+## Question 1-3
+
+Here is the link to my logistic_growth repo: https://github.com/AnonymousBiology/logistic_growth
+
 ## Question 4
 
 ### _Execute the code to produce the paths of two random walks. What do you observe? (10)_
